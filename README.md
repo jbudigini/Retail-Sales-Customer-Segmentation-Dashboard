@@ -16,7 +16,7 @@ A data analysis project that transforms raw online retail data into actionable b
 
 ## Dataset
 
-The dataset is sourced from [Kaggle — Online Retail Data v3](https://www.kaggle.com/datasets/coldperformer/online-retail-data-v3) and contains the following fields:
+The dataset is sourced from [Kaggle - Online Retail Data v3](https://www.kaggle.com/datasets/coldperformer/online-retail-data-v3) and contains the following fields:
 
 | Column | Description |
 |--------|-------------|
