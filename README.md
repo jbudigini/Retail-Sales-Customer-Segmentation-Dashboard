@@ -7,7 +7,7 @@ A data analysis project that transforms raw online retail data into actionable b
 ## Project Highlights
 
 - **5,835 customers** segmented across **78 unique RFM scores**
-- **£3.45M+** in total revenue analyzed
+- **3.45M+** in total revenue analyzed
 - Purchase recency ranging from **23 to 761 days**
 - Customer frequency spanning **1 to 10,700+ transactions**
 - Interactive Power BI dashboard with year, month, and country filters
