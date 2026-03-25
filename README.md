@@ -1,67 +1,96 @@
-# Retail Data Analysis
+# Retail Sales Customer Segmentation Dashboard
 
-## Overview
+A data analysis project that transforms raw online retail data into actionable business insights through SQL-based data cleaning, RFM customer segmentation, and an interactive Power BI dashboard.
 
-This repository offers a comprehensive exploration of retail data, which has been meticulously prepared and analyzed for actionable insights. The dataset contains retail data with the following columns:
--	`bill`: Bill or invoice identifier
--	`merchandise id`: Identifier for merchandise
--	`product`: Product name
--	`quota`: Quantity of the product in the order
--	`amount`: Amount or price for the product
--	`customer id`: Customer identifier
--	`country`: Country of the customers
+---
 
+## Project Highlights
 
-## Data Cleansing in SQL
+- **5,835 customers** segmented across **78 unique RFM scores**
+- **£3.45M+** in total revenue analyzed
+- Purchase recency ranging from **23 to 761 days**
+- Customer frequency spanning **1 to 10,700+ transactions**
+- Interactive Power BI dashboard with year, month, and country filters
 
-Before conducting analysis and visualization, I performed data cleansing in SQL, which involved the following tasks:
--	Removing rows with null values.
--	Formatting columns to the appropriate data types.
--	Eliminating redundant values.
--	Ensuring data accuracy and consistency.
+---
 
+## Dataset
 
-## Analysis and Visuals
+The dataset is sourced from [Kaggle — Online Retail Data v3](https://www.kaggle.com/datasets/coldperformer/online-retail-data-v3) and contains the following fields:
 
--	Following the data cleansing, I conducted a thorough analysis and created visuals in Power BI to gain insights. The following analysis and visualizations were performed:
+| Column | Description |
+|--------|-------------|
+| `Bill` | Invoice identifier |
+| `MerchandiseID` | Product identifier |
+| `Product` | Product name |
+| `Quota` | Quantity ordered |
+| `BillDate` | Invoice date |
+| `Amount` | Transaction amount |
+| `CustomerID` | Customer identifier |
+| `Country` | Customer country |
 
--	RFM Analysis: You used SQL to perform RFM (Recency, Frequency, Monetary) analysis to segment customers based on their purchasing behavior.
+---
 
--	Retail Dashboard in Power BI: A retail dashboard was created in Power BI with the following visuals: 
+## Workflow
 
--	Quantity Orders vs. Invoice Date: Shows the trend of quantity orders over time.
--	Total Sales vs. Invoice Date: Illustrates the total sales over time.
--	Highest Sold Product: Highlights the product that has the highest sales.
--	Country and Total/Average Revenue Table: Displays a table with country-wise total and average revenue.
--	Most Valuable Customer Using RFM Analysis: Identifies the most valuable customer based on RFM segments.
--	Total and Average Revenue by Month: Shows the total and average revenue for each month.
--	Number of Customers in Each RFM Score: Presents the count of customers in each RFM segment.
--	Filtering Options: Filters are provided in the dashboard to allow users to filter the data by year, month, and country, enabling them to focus on specific subsets of data.
+### 1. Data Cleaning (SQL)
 
-## Data Sources
+Raw data was cleaned and standardized using SQL Server:
 
-This dataset is by Kaggle 
-https://www.kaggle.com/datasets/coldperformer/online-retail-data-v3
+- **Type formatting** — Converted `BillDate` to a proper `DATE` type.
+- **Null removal** — Deleted rows with missing `Bill`, `MerchandiseID`, or `CustomerID` values.
+- **Deduplication** — Identified and removed redundant records using `ROW_NUMBER()` with partitioning across all columns.
+- **Column renaming** — Renamed `Quota` → `Quantity` for clarity and rounded `Amount` to two decimal places.
+
+### 2. RFM Analysis (SQL)
+
+Customers were scored on three dimensions using `NTILE(5)` grouping:
+
+- **Recency** — Days since the customer's last purchase (relative to 2020-01-01).
+- **Frequency** — Total number of transactions per customer.
+- **Monetary** — Total spend per customer.
+
+Each dimension is scored 1–5, producing a composite RFM score (e.g., `555` = highest value customer, `111` = lowest). The analysis identified **513 top-tier customers** (score `555`) and **432 at-risk customers** (score `111`).
+
+### 3. Power BI Dashboard
+
+An interactive dashboard was built with the following visuals:
+
+- Quantity orders vs. invoice date (trend line)
+- Total sales vs. invoice date (trend line)
+- Highest sold product
+- Country-level total and average revenue table
+- Most valuable customer by RFM score
+- Monthly total and average revenue breakdown
+- Customer count per RFM segment
+- Filters for year, month, and country
+
+---
 
 ## Project Files
 
-- ` RetailData.xlsx` - Dataset from Kaggle.
-- ` Cleansed RetailData.csv` - Result data after cleaning.
-- ` RFM RetailData Analysis.csv` - Result data after RFM Analysis.
-- ` Cleansed RetailData Script.sql` - SQL cleaning script.
-- ` Retail Analysis Report.pbix` - Powerbi Dashboard.
-- `README.md` - This document.
+```
+├── RetailData.xlsx                  # Raw dataset from Kaggle
+├── Cleansed_RetailData.csv          # Cleaned output data
+├── RFM_RetailData_Analysis.csv      # RFM scores for all 5,835 customers
+├── Cleansed_RetailData_Script.sql   # SQL cleaning & RFM script
+├── Retail_Analysis_Report.pbix      # Power BI dashboard
+└── README.md                        # This file
+```
 
+---
 
-## How to Use the Dashboard
+## Getting Started
 
--	Open the Power BI dashboard provided with this dataset to access the visualizations.
--	You can interact with the visuals, filter data, and explore insights by selecting filters such as year, month, and country.
--	Each visualization is labeled for easy navigation and provides valuable insights into retail data.
+1. **Review the SQL script** — Open `Cleansed_RetailData_Script.sql` to see the full cleaning and RFM logic.
+2. **Explore the RFM data** — Open `RFM_RetailData_Analysis.csv` to browse customer segments.
+3. **Open the dashboard** — Load `Retail_Analysis_Report.pbix` in [Power BI Desktop](https://powerbi.microsoft.com/desktop/) to interact with the visuals and apply filters.
 
-## Conclusion
+---
 
-The retail data analysis and Power BI dashboard allow you to understand customer behavior, sales trends, and other important insights in the retail sector. Use these insights to make data-driven decisions and enhance your retail strategies.
+## Tools Used
 
-For any further questions or assistance, please contact `Mayada Yousuf` at mayadayousuf96@gmail.com.
+- **SQL Server** — Data cleaning and RFM analysis
+- **Power BI** — Dashboard and visualizations
+- **Excel / CSV** — Data storage and export
 
